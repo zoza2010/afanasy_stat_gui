@@ -1,11 +1,7 @@
 import psycopg2
-import psycopg2.extras
 from flask import Flask, render_template, jsonify
-import time
 
-
-
-def get_stat(connection):
+def get_stat(connection, show_by):
     cmd = '''DO $$
     DECLARE
       _query text;
@@ -15,7 +11,7 @@ def get_stat(connection):
       _query := '
         SELECT  DATE(''1970-01-01''::date + (time_started * interval ''1 second'')) as start_date
             '||(SELECT ', '||string_agg(DISTINCT 
-                        ' sum(case when service ='||quote_literal(service)||' then 1 else 0 end) AS '||quote_ident(service),',') 
+                        ' sum(case when {column} ='||quote_literal({column})||' then 1 else 0 end) AS '||quote_ident({column}),',') 
                 FROM jobs)||'
         FROM jobs
         GROUP BY start_date
@@ -31,7 +27,7 @@ def get_stat(connection):
     END
     $$;
 
-    EXECUTE prepared_query;'''
+    EXECUTE prepared_query;'''.format(column=show_by)
     with connection.cursor() as cursor:
         cursor.execute(cmd)
         # coldata = cursor.fetchall()
@@ -74,14 +70,8 @@ def chartify_data(colnames, coldata):
     return data
 
 
-# conn = psycopg2.connect (dbname='afanasy' , user='afadmin' ,
-#                          password='AfPassword' , host='10.2.67.101')
-#
-# colnames, data = get_stat(conn)
-# chartify_data(colnames, data)
 
 app = Flask(__name__)
-# print(get_stat(conn)['start_date'])
 
 
 @app.route('/', methods = ['POST', 'GET'])
@@ -90,10 +80,18 @@ def index():
     return render_template('index.html', meta = metadata)
 
 
-@app.route('/data')
-def config():
-    colnames , data = get_stat(conn)
-    return jsonify(chartify_data (colnames , data))
+@app.route('/data/<variable>')
+def config(variable):
+    if variable=='service':
+        colnames , data = get_stat(conn, 'service')
+        return jsonify(chartify_data (colnames , data))
+
+    elif variable == 'username':
+        colnames , data = get_stat (conn , 'username')
+        return jsonify (chartify_data (colnames , data))
+
+    else:
+        pass
 
 
 @app.route('/stat')

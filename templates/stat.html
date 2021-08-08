@@ -15,7 +15,11 @@
     <h1>Statistics visualizer</h1>
     <hr>
     <div class="container">
-        <canvas id="myChart"></canvas>
+        <canvas id="Service"></canvas>
+    </div>
+    <hr>
+    <div class="container">
+        <canvas id="Username"></canvas>
     </div>
     <hr>
     <a href="/">
@@ -24,20 +28,32 @@
 </body>
 
 <script>
-    var getData = $.getJSON('/data');
+    var chartOptions = {
+      legend: {
+        display: true,
+        position: 'top',
+        labels: {
+          boxWidth: 100,
+          fontColor: 'black'
+        }
+      }
+    };
+
+
+    var getData = $.getJSON('/data/service');
     getData.done(function(results){
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var chartOptions = {
-              legend: {
-                display: true,
-                position: 'top',
-                labels: {
-                  boxWidth: 100,
-                  fontColor: 'black'
-                }
-              }
-            };
+        var ctx = document.getElementById('Service').getContext('2d');
         var myChart = new Chart(ctx, {
+            type: 'line',
+            data: results,
+            options: chartOptions
+        });
+    });
+
+    var getData = $.getJSON('/data/username');
+    getData.done(function(results){
+        var ctx = document.getElementById('Username').getContext('2d');
+        var anotherChart = new Chart(ctx, {
             type: 'line',
             data: results,
             options: chartOptions
