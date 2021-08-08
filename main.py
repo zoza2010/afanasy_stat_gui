@@ -93,6 +93,10 @@ def config(variable):
     else:
         pass
 
+@app.route('/test')
+def test():
+    return render_template('test.html')
+
 
 @app.route('/stat')
 def stat():

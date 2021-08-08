@@ -1,39 +1,22 @@
-const DATA_COUNT = 7;
-const NUMBER_CFG = {count: DATA_COUNT, min: -100, max: 100};
+/* 
+ _____   _           _         _                        _                  
+|_   _| | |         | |       | |                      | |                 
+  | |   | |__   __ _| |_ ___  | |_ ___  _ __ ___   __ _| |_ ___   ___  ___ 
+  | |   | '_ \ / _` | __/ _ \ | __/ _ \| '_ ` _ \ / _` | __/ _ \ / _ \/ __|
+ _| |_  | | | | (_| | ||  __/ | || (_) | | | | | | (_| | || (_) |  __/\__ \
+ \___/  |_| |_|\__,_|\__\___|  \__\___/|_| |_| |_|\__,_|\__\___/ \___||___/
 
-const data = {
-  labels: ['test', 'shit', 'anus'],
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: [1, 2, 1],
-      fill: false,
-      borderColor: 'rgba(255, 99, 132, 0.2)',
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-    },
-        {
-      label: 'Dataset 2',
-      data: [2, 0, 3],
-      fill: false,
-      borderColor: 'rgba(255, 99, 132, 0.2)',
-      backgroundColor: 'rgba(255, 99, 132, 0.2)',
-    }
-  ]
-};
+Oh nice, welcome to the js file of dreams.
+Enjoy responsibly!
+@ihatetomatoes
 
-const config = {
-  type: 'line',
-  data: data,
-  options: {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'left',
-      },
-      title: {
-        display: true,
-        text: 'Chart.js Line Chart'
-      }
-    }
-  },
-};
+*/
+
+$(document).ready(function() {
+	
+	setTimeout(function(){
+		$('body').addClass('loaded');
+		$('h1').css('color','#222222');
+	}, 50);
+	
+});
