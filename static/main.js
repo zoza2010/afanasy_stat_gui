@@ -20,3 +20,69 @@ $(document).ready(function() {
 	}, 50);
 	
 });
+
+
+
+
+const config = {
+  type: 'line',
+  data: data,
+  options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Chart.js Line Chart - Cubic interpolation mode'
+      },
+    },
+    interaction: {
+      intersect: false,
+    },
+    scales: {
+      x: {
+        display: true,
+        title: {
+          display: true
+        }
+      },
+      y: {
+        display: true,
+        title: {
+          display: true,
+          text: 'Value'
+        },
+        suggestedMin: -10,
+        suggestedMax: 200
+      }
+    }
+  },
+};
+
+
+
+
+const config = {
+          type: 'line',
+          data: results,
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'left',
+              },
+              title: {
+                display: true,
+                text: 'Chart.js Line Chart'
+              }
+            },
+
+scales:{y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Value'
+            },
+
+
+          }},
+        }};

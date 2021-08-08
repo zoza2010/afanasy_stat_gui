@@ -30,7 +30,7 @@
     getData.done(function(results){
         var ctx = document.getElementById('Service').getContext('2d');
 
-          const config = {
+const config = {
           type: 'line',
           data: results,
           options: {
@@ -43,9 +43,18 @@
                 display: true,
                 text: 'Chart.js Line Chart'
               }
-            }
+            },
+
+            scales:{y: {
+                        display: true,
+                        title: {
+                          display: true,
+                          text: 'tasks count'
+                        },
+
+          }
           },
-        };
+        }};
         var myChart = new Chart(ctx, config);
     });
 
